@@ -41,7 +41,7 @@ a { color: inherit; }
 
 .half-photo {
   background: #f1ece3;
-  border-right: 1px solid var(--line);
+  border-left: 1px solid var(--line);
 }
 
 .half-photo:hover { background: #ece2d2; }
@@ -64,6 +64,7 @@ a { color: inherit; }
 }
 
 .half-code .eyebrow { color: #7d7d78; }
+
 
 .half h2 {
   font-size: 2rem;
@@ -90,7 +91,7 @@ a { color: inherit; }
 
 @media (max-width: 720px) {
   .split { flex-direction: column; }
-  .half-photo { border-right: none; border-bottom: 1px solid var(--line); }
+  .half-code { border-right: none; border-bottom: 1px solid var(--line); }
   .half:hover { flex: 1; }
 }
 
