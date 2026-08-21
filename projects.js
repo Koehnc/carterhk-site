@@ -70,7 +70,46 @@ function renderSlides(projects) {
   });
 }
 
+function setupActiveTabSync() {
+  const slidesContainer = document.getElementById("project-slides");
+  const tabs = document.querySelectorAll(".project-tab");
+  const slides = document.querySelectorAll(".project-slide");
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const index = entry.target.dataset.index;
+          tabs.forEach((tab) => tab.classList.remove("active"));
+          const activeTab = document.querySelector(`.project-tab[data-index="${index}"]`);
+          if (activeTab) {
+            activeTab.classList.add("active");
+          }
+        }
+      });
+    },
+    { root: slidesContainer, threshold: 0.6 }
+  );
+
+  slides.forEach((slide) => observer.observe(slide));
+
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      const index = tab.dataset.index;
+      const targetSlide = document.querySelector(`.project-slide[data-index="${index}"]`);
+      if (targetSlide) {
+        targetSlide.scrollIntoView({ behavior: "smooth", inline: "start", block: "nearest" });
+      }
+    });
+  });
+
+  if (tabs.length > 0) {
+    tabs[0].classList.add("active");
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   renderTabs(PROJECTS);
   renderSlides(PROJECTS);
+  setupActiveTabSync();
 });
