@@ -158,36 +158,113 @@ a { color: inherit; }
   text-decoration: underline;
 }
 
-.projects {
-  display: grid;
-  gap: 1rem;
-  margin-bottom: 2rem;
+.project-page-enter {
+  animation: slide-in-right 0.5s ease-out;
 }
 
-.project-card {
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  padding: 1.25rem 1.5rem;
-  background: #fff;
+@keyframes slide-in-right {
+  from { transform: translateX(40px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
 }
 
-.project-card h3 {
-  margin: 0 0 0.35rem;
-  font-size: 1.1rem;
+.project-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem 1.5rem;
+  background: #0b0f0e;
 }
 
-.project-card p {
-  margin: 0;
-  color: var(--muted);
+.project-tab {
+  width: 56px;
+  height: 40px;
+  border-radius: 4px;
+  border: 2px solid transparent;
+  background-color: #3a3f3c;
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+  padding: 0;
+}
+
+.project-tab.active {
+  border-color: #7fd9b6;
+}
+
+.project-tab.placeholder {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.project-slides {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.project-slides::-webkit-scrollbar {
+  display: none;
+}
+
+.project-slide {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  min-height: 70vh;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  background-color: #101614;
+  background-size: cover;
+  background-position: center;
+  box-sizing: border-box;
+}
+
+.project-slide.placeholder {
+  align-items: center;
+  justify-content: center;
+  color: #6b6a64;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.slide-content {
+  position: relative;
+  width: 100%;
+  padding: 2rem;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.75), transparent);
+  color: #e9e7e1;
+  box-sizing: border-box;
+}
+
+.slide-tags {
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #9a9a94;
+}
+
+.project-slide h2 {
+  margin: 0.4rem 0 0.5rem;
+  font-size: 1.6rem;
+}
+
+.project-slide p {
+  margin: 0 0 0.75rem;
+  max-width: 60ch;
+  color: #c9c7c1;
   font-size: 0.95rem;
 }
 
-.tag {
+.github-link {
   display: inline-block;
-  font-size: 0.75rem;
-  color: var(--muted);
-  border: 1px solid var(--line);
+  border: 1px solid #4a5551;
   border-radius: 999px;
-  padding: 0.15rem 0.6rem;
-  margin-top: 0.6rem;
+  padding: 0.35rem 1rem;
+  font-size: 0.85rem;
+  color: inherit;
+  text-decoration: none;
 }
+
