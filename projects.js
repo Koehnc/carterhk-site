@@ -80,10 +80,14 @@ function setupActiveTabSync() {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           const index = entry.target.dataset.index;
-          tabs.forEach((tab) => tab.classList.remove("active"));
+          tabs.forEach((tab) => {
+            tab.classList.remove("active");
+            tab.removeAttribute("aria-current");
+          });
           const activeTab = document.querySelector(`.project-tab[data-index="${index}"]`);
           if (activeTab) {
             activeTab.classList.add("active");
+            activeTab.setAttribute("aria-current", "true");
           }
         }
       });
@@ -105,6 +109,7 @@ function setupActiveTabSync() {
 
   if (tabs.length > 0) {
     tabs[0].classList.add("active");
+    tabs[0].setAttribute("aria-current", "true");
   }
 }
 

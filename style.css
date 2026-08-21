@@ -160,11 +160,18 @@ a { color: inherit; }
 
 .project-page-enter {
   animation: slide-in-right 0.5s ease-out;
+  overflow-x: hidden;
 }
 
 @keyframes slide-in-right {
   from { transform: translateX(40px); opacity: 0; }
   to { transform: translateX(0); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-page-enter {
+    animation: none;
+  }
 }
 
 .project-tabs {
@@ -194,7 +201,6 @@ a { color: inherit; }
 
 .project-tab.placeholder {
   opacity: 0.6;
-  cursor: default;
 }
 
 .project-slides {
@@ -224,7 +230,7 @@ a { color: inherit; }
 .project-slide.placeholder {
   align-items: center;
   justify-content: center;
-  color: #6b6a64;
+  color: var(--muted);
   font-size: 0.95rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
