@@ -98,14 +98,14 @@ a { color: inherit; }
 .page {
   max-width: 780px;
   margin: 0 auto;
-  padding: 3rem 1.5rem 5rem;
+  padding: 1.6rem 1.5rem 2rem;
 }
 
 .page-nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 3rem;
+  margin-bottom: 1.6rem;
   font-size: 0.9rem;
 }
 
@@ -121,12 +121,12 @@ a { color: inherit; }
 
 .page h1 {
   font-size: 2rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
 }
 
 .page .lede {
   color: var(--muted);
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.35rem;
 }
 
 .gallery {
