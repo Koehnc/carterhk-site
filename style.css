@@ -148,16 +148,10 @@ a { color: inherit; }
 }
 
 .callout {
-  width: fit-content;
-  max-width: 100%;
-  margin: 0 auto;
   border: 1px solid var(--line);
-  border-radius: 999px;
-  padding: 0.9rem 1.75rem;
-  background: rgba(255, 255, 255, 0.45);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  text-align: center;
+  border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+  background: #fff;
 }
 
 .callout a {
@@ -224,7 +218,7 @@ a { color: inherit; }
 .project-slide {
   flex: 0 0 100%;
   scroll-snap-align: start;
-  min-height: 46.7vh;
+  min-height: 70vh;
   position: relative;
   display: flex;
   align-items: flex-end;
