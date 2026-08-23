@@ -24,10 +24,15 @@ function setupCodeParticles() {
     };
   }
 
-  function resize() {
-    const rect = container.getBoundingClientRect();
-    width = rect.width;
-    height = rect.height;
+  function resize(newWidth, newHeight) {
+    // Reallocating the canvas backing store is expensive; the hover-sway
+    // transition fires many resize notifications per animation, most with
+    // a sub-pixel or zero-width change, so skip reallocating when the size
+    // hasn't meaningfully moved.
+    if (Math.abs(newWidth - width) < 1 && Math.abs(newHeight - height) < 1) return;
+
+    width = newWidth;
+    height = newHeight;
     canvas.width = width * dpr;
     canvas.height = height * dpr;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -77,15 +82,37 @@ function setupCodeParticles() {
     if (!reduceMotion) requestAnimationFrame(step);
   }
 
-  function handleResize() {
-    resize();
-    // Resizing the canvas backing store always clears it. When motion is
-    // reduced there's no rAF loop left running to redraw on the next
-    // frame, so force one here; the animated loop redraws on its own.
-    if (reduceMotion) step();
+  // ResizeObserver hands us the new size directly (computed as part of the
+  // browser's own layout pass). Using that instead of calling
+  // getBoundingClientRect() avoids forcing a synchronous layout read while
+  // the hover-sway flex transition is running, which was otherwise
+  // flushing pending style/paint work for the whole page (including the
+  // photo side's animated glow) into that single frame and causing
+  // multi-hundred-ms stalls.
+  let resizeScheduled = false;
+  let pendingWidth = 0;
+  let pendingHeight = 0;
+
+  function handleResize(entries) {
+    const entry = entries[0];
+    const box = entry.contentBoxSize && entry.contentBoxSize[0];
+    pendingWidth = box ? box.inlineSize : entry.contentRect.width;
+    pendingHeight = box ? box.blockSize : entry.contentRect.height;
+
+    if (resizeScheduled) return;
+    resizeScheduled = true;
+    requestAnimationFrame(() => {
+      resizeScheduled = false;
+      resize(pendingWidth, pendingHeight);
+      // Resizing the canvas backing store always clears it. When motion is
+      // reduced there's no rAF loop left running to redraw on the next
+      // frame, so force one here; the animated loop redraws on its own.
+      if (reduceMotion) step();
+    });
   }
 
-  resize();
+  const initialRect = container.getBoundingClientRect();
+  resize(initialRect.width, initialRect.height);
   new ResizeObserver(handleResize).observe(container);
   step();
 }
