@@ -113,8 +113,49 @@ function setupActiveTabSync() {
   }
 }
 
+function setupMouseDragToScroll() {
+  const container = document.getElementById("project-slides");
+  let isDragging = false;
+  let dragged = false;
+  let startX = 0;
+  let startScrollLeft = 0;
+
+  container.addEventListener("mousedown", (e) => {
+    isDragging = true;
+    dragged = false;
+    startX = e.pageX;
+    startScrollLeft = container.scrollLeft;
+    container.classList.add("dragging");
+  });
+
+  window.addEventListener("mousemove", (e) => {
+    if (!isDragging) return;
+    const delta = e.pageX - startX;
+    if (Math.abs(delta) > 5) dragged = true;
+    container.scrollLeft = startScrollLeft - delta;
+  });
+
+  window.addEventListener("mouseup", () => {
+    if (!isDragging) return;
+    isDragging = false;
+    container.classList.remove("dragging");
+  });
+
+  container.addEventListener(
+    "click",
+    (e) => {
+      if (dragged) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    },
+    true
+  );
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   renderTabs(PROJECTS);
   renderSlides(PROJECTS);
   setupActiveTabSync();
+  setupMouseDragToScroll();
 });

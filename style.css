@@ -209,10 +209,18 @@ a { color: inherit; }
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
+  cursor: grab;
 }
 
 .project-slides::-webkit-scrollbar {
   display: none;
+}
+
+.project-slides.dragging {
+  cursor: grabbing;
+  scroll-snap-type: none;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .project-slide {
