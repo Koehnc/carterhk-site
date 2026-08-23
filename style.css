@@ -37,7 +37,7 @@ a { color: inherit; }
   transition: flex 0.35s ease, background 0.35s ease;
 }
 
-.half:hover { flex: 1.15; }
+.half:hover { flex: 1.4; }
 
 .half-photo {
   background: #f1ece3;
