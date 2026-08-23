@@ -186,7 +186,7 @@ a { color: inherit; }
   flex-wrap: wrap;
   justify-content: center;
   gap: 0.5rem;
-  padding: 1rem 1.5rem;
+  padding: 0.25rem 1.5rem;
   background: #0b0f0e;
 }
 
@@ -224,7 +224,7 @@ a { color: inherit; }
 .project-slide {
   flex: 0 0 100%;
   scroll-snap-align: start;
-  min-height: 46.7vh;
+  min-height: 70vh;
   position: relative;
   display: flex;
   align-items: flex-end;
@@ -232,6 +232,15 @@ a { color: inherit; }
   background-size: cover;
   background-position: center;
   box-sizing: border-box;
+}
+
+.project-slide::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 20%;
+  background: linear-gradient(to bottom, rgba(11, 15, 14, 0.9), transparent);
+  pointer-events: none;
 }
 
 .project-slide.placeholder {
