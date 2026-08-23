@@ -218,7 +218,7 @@ a { color: inherit; }
 .project-slide {
   flex: 0 0 100%;
   scroll-snap-align: start;
-  min-height: 70vh;
+  min-height: 80vh;
   position: relative;
   display: flex;
   align-items: flex-end;
