@@ -229,7 +229,8 @@ a { color: inherit; }
   min-height: 80vh;
   position: relative;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
+  justify-content: center;
   background-color: #101614;
   background-size: cover;
   background-position: center;
@@ -237,8 +238,6 @@ a { color: inherit; }
 }
 
 .project-slide.placeholder {
-  align-items: center;
-  justify-content: center;
   color: var(--muted);
   font-size: 0.95rem;
   text-transform: uppercase;
@@ -247,9 +246,13 @@ a { color: inherit; }
 
 .slide-content {
   position: relative;
-  width: 100%;
-  padding: 2rem;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.75), transparent);
+  max-width: min(480px, calc(100% - 3rem));
+  padding: 1.75rem 2rem;
+  background: rgba(11, 15, 14, 0.45);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 20px;
   color: #e9e7e1;
   box-sizing: border-box;
 }
